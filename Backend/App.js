@@ -1,0 +1,244 @@
+const express = require('express');
+const connection = require('./db');
+const cors = require('cors');
+const server = express();
+
+server.use(cors());
+server.use(express.json());
+
+server.get('/pacientes', (req, res) => {
+    const sql = 'SELECT * FROM pacientes';
+    connection.query(sql , (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json(resultados);
+    });
+});
+
+server.get('/pacientes/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    return res.json(pacientes[id]);
+});
+
+server.post('/pacientes', (req, res) => {
+    
+    const { nome_paciente, cpf, data_nascimento, telefone, endereco } = req.body
+    const sql = 'INSERT INTO pacientes (nome, cpf, data_nascimento, telefone, endereco) VALUES (?,?,?,?,?)';
+
+    connection.query(sql, [nome_paciente, cpf, data_nascimento, telefone, endereco],  (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json({
+            mensagem: 'Paciente cadastrado!',
+            id: resultados.insertId,
+            nome: nome_paciente,
+            cpf: cpf,
+            data_nascimento: data_nascimento,
+            telefone: telefone,
+            endereco:endereco
+        });
+    });
+});
+
+server.put('/pacientes/:id', (req, res) => {
+
+    const id = req.params.id;
+    const nome_paciente = req.body.nome_paciente;
+    const sql = 'UPDATE pacientes SET nome = ? WHERE id = ?';
+
+    connection.query(sql, [nome_paciente, id], (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json({
+            mensagem: 'Paciente atualizado!',
+            nome: nome_paciente,
+            id: id
+        });
+    });
+});
+
+server.delete('/pacientes/:id', (req, res) => {
+
+    const id = req.params.id;
+    const sql = 'DELETE FROM pacientes WHERE id = ?';
+
+    connection.query(sql,  [id], (erro) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json({
+            mensagem: 'Paciente removido'
+        });
+    });
+});
+
+//MEDICOS
+
+server.get('/Medicos', (req, res) => {
+    const sql = 'SELECT * FROM Medicos';
+    connection.query(sql , (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json(resultados);
+    });
+});
+
+server.get('/Medicos/:id', (req, res) => {
+
+    const id = req.params.id;
+    const sql = 'SELECT * FROM Medicos WHERE id = ?';
+
+    connection.query(sql, [id], (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+    }
+        return res.json(resultados[0]);
+    });
+});
+
+server.post('/Medicos', (req, res) => {
+    
+    const { nome, especialidade, telefone } = req.body
+    const sql = 'INSERT INTO Medicos (nome, especialidade, telefone) VALUES (?, ?, ?)';
+
+    connection.query(sql, [nome, especialidade, telefone],  (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json({
+            mensagem: 'Medico cadastrado!',
+            id: resultados.insertId,
+            nome: nome,
+            especialidade: especialidade,
+            telefone:telefone
+        });
+    });
+});
+
+server.put('/Medicos/:id', (req, res) => {
+
+    const id = req.params.id;
+    const nome = req.body.nome;
+    const sql = 'UPDATE Medicos SET nome = ? WHERE id = ?';
+
+    connection.query(sql, [nome, id], (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json({
+            mensagem: 'Medico atualizado!',
+            nome: nome,
+            id: id
+        });
+    });
+});
+
+server.delete('/Medicos/:id', (req, res) => {
+
+    const id = req.params.id;
+    const sql = 'DELETE FROM Medicos WHERE id = ?';
+
+    connection.query(sql,  [id], (erro) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json({
+            mensagem: 'Medico removido'
+        });
+    });
+});
+
+/*Consultas*/ 
+
+server.get('/Consultas', (req, res) => {
+    const sql = `
+        SELECT
+            c.id_consulta,
+            p.nome_paciente,
+            c.horario,
+            c.motivo
+        FROM Consultas c
+        INNER JOIN pacientes p
+        ON c.id_paciente = p.id_paciente`;
+    connection.query(sql , (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json(resultados);
+    });
+});
+
+server.get('/Consultas/:id', (req, res) =>{
+
+    const id = req.params.id;
+    const sql = 'SELECT * FROM Consultas WHERE id = ?';
+
+    connection.query(sql, [id], (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json(resultados[0]);
+    });
+});
+
+server.post('/Consultas', (req, res) =>{
+    const { id_paciente, horario, motivo } = req.body
+    const sql = 'INSERT INTO Consultas (id_paciente, horario, motivo) VALUES (?, ?, ?)';
+
+    connection.query(sql, [id_paciente, horario, motivo], (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json({
+            mensagem: 'Consulta cadastrada!',
+            id: resultados.insertId,
+            id_paciente: id_paciente,
+            horario: horario,
+            motivo: motivo
+        });
+    });
+});
+
+server.put('/Consultas/:id', (req, res) => {
+    const id = req.params.id;
+    const { id_paciente, horario, motivo } = req.body;
+    const sql = 'UPDATE Consultas SET id_paciente = ?, horario = ?, motivo = ? WHERE id = ?';
+
+    connection.query(sql, [id_paciente, horario, motivo, id], (erro, resultados) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json({
+            mensagem: 'Consulta atualizada!',
+            id: id,
+            id_paciente: id_paciente,
+            horario: horario,
+            motivo: motivo
+        });
+    });
+});
+
+server.delete('/Consultas/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = 'DELETE FROM Consultas WHERE id = ?';
+
+    connection.query(sql, [id], (erro) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message});
+        }
+        return res.json({
+            mensagem: 'Consulta removida'
+        });
+    });
+})
+
+
+server.listen(3025, () =>{
+    console.log("Servidor rodando na porta 3025");
+})
