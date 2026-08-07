@@ -21,6 +21,10 @@ async function listarPaciente() {
 
 async function cadastarPaciente(){
     const nome_paciente = document.getElementById('nome_paciente').value;
+    const cpf = document.getElementById('cpf').value;
+    const data_nascimento = document.getElementById('data_nascimento').value;
+    const telefone = document.getElementById('telefone').value;
+    const endereco = document.getElementById('endereco').value;
 
     if(nome_paciente === ''){
         alert('Digite o nome do paciente');
@@ -30,13 +34,17 @@ async function cadastarPaciente(){
      const resposta = await fetch('http://localhost:3025/pacientes', {
         method: 'POST',
         headers:{'Content-type': 'application/json'},
-        body:JSON.stringify({nome_paciente})
+        body:JSON.stringify({nome_paciente, cpf, data_nascimento, telefone, endereco})
      });
 
      const dados = await resposta.json();
      alert(dados.mensagem);
 
-     document.getElementById('nome_paciente').value =''
+     document.getElementById('nome_paciente').value ='';
+     document.getElementById('cpf').value ='';
+     document.getElementById('data_nascimento').value ='';
+     document.getElementById('telefone').value ='';
+     document.getElementById('endereco').value ='';
      listarPaciente();
 };
 
@@ -110,6 +118,8 @@ async function cadastrarMedico(){
      alert(dados.mensagem);
 
      document.getElementById('nome').value =''
+     document.getElementById('especialidade').value =''
+     document.getElementById('telefone').value =''
      listarMedicos();
 };
 
