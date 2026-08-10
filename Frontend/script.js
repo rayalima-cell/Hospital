@@ -197,13 +197,22 @@ async function cadastrarConsulta(){
         method: 'POST',
         headers:{'Content-type': 'application/json'},
         body:JSON.stringify({
-            
+            id_paciente,
+            horario,
+            motivo
         })
      });
 
      const dados = await resposta.json();
+
+     if(!resposta.ok){
+        alert(`Erro ao cadastrar consulta: ${dados.erro}`);
+        return;
+     }
      alert(dados.mensagem);
 
+     document.getElementById('id_paciente').value =''
+     document.getElementById('horario').value =''
      document.getElementById('motivo').value =''
      listarConsultas();
 };
