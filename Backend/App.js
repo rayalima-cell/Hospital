@@ -24,24 +24,32 @@ server.get('/pacientes/:id', (req, res) => {
 });
 
 server.post('/pacientes', (req, res) => {
-    
-    const { nome_paciente, cpf, data_nascimento, telefone, endereco } = req.body
-    const sql = 'INSERT INTO pacientes (nome, cpf, data_nascimento, telefone, endereco) VALUES (?,?,?,?,?)';
 
-    connection.query(sql, [nome_paciente, cpf, data_nascimento, telefone, endereco],  (erro, resultados) => {
-        if(erro){
-            return res.status(500).json({erro: erro.message});
+    const { nome_paciente, cpf, data_nascimento, telefone, endereco } = req.body;
+
+    const sql = 'INSERT INTO pacientes (nome_paciente, cpf, data_nascimento, telefone, endereco) VALUES (?, ?, ?, ?, ?)';
+
+    connection.query(
+        sql,
+        [nome_paciente, cpf, data_nascimento, telefone, endereco],
+        (erro, resultados) => {
+
+            if (erro) {
+                console.log(erro);
+                return res.status(500).json({ erro: erro.message });
+            }
+
+            return res.json({
+                mensagem: 'Paciente cadastrado!',
+                id: resultados.insertId,
+                nome_paciente: nome_paciente,
+                cpf: cpf,
+                data_nascimento: data_nascimento,
+                telefone: telefone,
+                endereco: endereco
+            });
         }
-        return res.json({
-            mensagem: 'Paciente cadastrado!',
-            id: resultados.insertId,
-            nome: nome_paciente,
-            cpf: cpf,
-            data_nascimento: data_nascimento,
-            telefone: telefone,
-            endereco:endereco
-        });
-    });
+    );
 });
 
 server.put('/pacientes/:id', (req, res) => {
