@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Consultas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="script.js"></script>
+
+    <h1>Cadastro de Consultas</h1>
+    <label>ID do Paciente: </label>
+    <input type="text" id="id_paciente" placeholder="Digite o ID do paciente">
+    <br>
+    <label>Horario: </label>
+    <input type="time" id="horario" placeholder="Digite o horário da consulta">
+    <br>
+    <label>Motivo: </label>
+    <input type="text" id="motivo" placeholder="Digite o motivo da consulta">
+    <br>
+    <button onclick="listarConsultas()"> Listar </button>
+    <button onclick="cadastrarConsulta()"> Cadastrar </button>
+    <ul id="lista3"></ul>
+    <hr>
+
+    <link rel="index" href="index.html">
+    <link rel="medico" href="medico.html">
+
+</body>
+</html>
