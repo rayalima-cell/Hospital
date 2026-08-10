@@ -56,9 +56,9 @@ server.put('/pacientes/:id', (req, res) => {
 
     const id = req.params.id;
     const nome_paciente = req.body.nome_paciente;
-    const sql = 'UPDATE pacientes SET nome = ? WHERE id_paciente = ?';
+    const sql = 'UPDATE pacientes SET nome_paciente = ? WHERE id_paciente = ?';
 
-    connection.query(sql, [nome_paciente, id_paciente], (erro, resultados) => {
+    connection.query(sql, [nome_paciente, id], (erro, resultados) => {
         if(erro){
             console.log("ERRO AO ATUALIZAR PACIENTE:", erro);
             return res.status(500).json({erro: erro.message});
@@ -107,7 +107,7 @@ server.get('/Medicos', (req, res) => {
 server.get('/Medicos/:id', (req, res) => {
 
     const id = req.params.id;
-    const sql = 'SELECT * FROM Medicos WHERE id = ?';
+    const sql = 'SELECT * FROM Medicos WHERE id_medico = ?';
 
     connection.query(sql, [id], (erro, resultados) => {
         if(erro){
@@ -120,7 +120,7 @@ server.get('/Medicos/:id', (req, res) => {
 server.post('/Medicos', (req, res) => {
     
     const { nome, especialidade, telefone } = req.body
-    const sql = 'INSERT INTO Medicos (nome, especialidade, telefone) VALUES (?, ?, ?)';
+    const sql = 'INSERT INTO Medicos (nome, especialidade, telefone)VALUES (?, ?, ?)';
 
     connection.query(sql, [nome, especialidade, telefone],  (erro, resultados) => {
         if(erro){
