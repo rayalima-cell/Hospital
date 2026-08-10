@@ -56,7 +56,7 @@ server.put('/pacientes/:id', (req, res) => {
 
     const id = req.params.id;
     const nome_paciente = req.body.nome_paciente;
-    const sql = 'UPDATE pacientes SET nome = ? WHERE id = ?';
+    const sql = 'UPDATE pacientes SET nome = ? WHERE id_paciente = ?';
 
     connection.query(sql, [nome_paciente, id], (erro, resultados) => {
         if(erro){
@@ -73,12 +73,18 @@ server.put('/pacientes/:id', (req, res) => {
 server.delete('/pacientes/:id', (req, res) => {
 
     const id = req.params.id;
-    const sql = 'DELETE FROM pacientes WHERE id = ?';
 
-    connection.query(sql,  [id], (erro) => {
-        if(erro){
-            return res.status(500).json({erro: erro.message});
+    const sql = 'DELETE FROM pacientes WHERE id_paciente = ?';
+
+    connection.query(sql, [id], (erro) => {
+
+        if (erro) {
+            console.log("ERRO AO EXCLUIR PACIENTE:", erro);
+            return res.status(500).json({
+                erro: erro.message
+            });
         }
+
         return res.json({
             mensagem: 'Paciente removido'
         });
@@ -150,11 +156,13 @@ server.put('/Medicos/:id', (req, res) => {
 server.delete('/Medicos/:id', (req, res) => {
 
     const id = req.params.id;
-    const sql = 'DELETE FROM Medicos WHERE id = ?';
+    const sql = 'DELETE FROM Medicos WHERE id_medico = ?';
 
     connection.query(sql,  [id], (erro) => {
         if(erro){
+            console.log(erro);
             return res.status(500).json({erro: erro.message});
+
         }
         return res.json({
             mensagem: 'Medico removido'
@@ -234,7 +242,7 @@ server.put('/Consultas/:id', (req, res) => {
 
 server.delete('/Consultas/:id', (req, res) => {
     const id = req.params.id;
-    const sql = 'DELETE FROM Consultas WHERE id = ?';
+    const sql = 'DELETE FROM Consultas WHERE id_consulta = ?';
 
     connection.query(sql, [id], (erro) => {
         if(erro){
