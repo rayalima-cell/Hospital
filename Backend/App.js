@@ -140,7 +140,7 @@ server.put('/Medicos/:id', (req, res) => {
 
     const id = req.params.id;
     const nome = req.body.nome;
-    const sql = 'UPDATE Medicos SET nome = ? WHERE id = ?';
+    const sql = 'UPDATE Medicos SET nome = ? WHERE id_medico = ?';
 
     connection.query(sql, [nome, id], (erro, resultados) => {
         if(erro){

@@ -128,6 +128,7 @@ async function editarMedico(id, nomeAtual) {
     const novoNome = prompt('Digite o novo nome: ', nomeAtual);
 
     if(!novoNome) return;
+    console.log(novoNome);
 
     await fetch(`http://localhost:3025/Medicos/${id}`, {
         method: 'PUT',
