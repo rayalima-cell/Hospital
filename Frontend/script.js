@@ -96,7 +96,7 @@ async function listarMedicos() {
     });
 };
 
-async function cadastrarMedico(){
+async function cadastrarMedicos(){
     const nome = document.getElementById('nome').value;
 
     if(nome === ''){
@@ -174,17 +174,31 @@ async function listarConsultas() {
 };
 
 async function cadastrarConsulta(){
+    const id_paciente = document.getElementById('id_paciente').value;
+    const horario = document.getElementById('horario').value;
     const motivo = document.getElementById('motivo').value;
+
+    if(id_paciente === ''){
+        alert('Digite o ID do paciente');
+        return;
+    }
+
+    if(horario === ''){
+        alert('Digite o horário da consulta');
+        return;
+    }
 
     if(motivo === ''){
         alert('Digite o motivo da consulta');
         return;
     }
-     
+    
      const resposta = await fetch('http://localhost:3025/Consultas', {
         method: 'POST',
         headers:{'Content-type': 'application/json'},
-        body:JSON.stringify({motivo})
+        body:JSON.stringify({
+            
+        })
      });
 
      const dados = await resposta.json();
