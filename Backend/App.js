@@ -225,17 +225,16 @@ server.post('/Consultas', (req, res) =>{
 server.put('/Consultas/:id', (req, res) => {
     const id = req.params.id;
     const { id_paciente, horario, motivo } = req.body;
-    const sql = 'UPDATE Consultas SET id_paciente = ?, horario = ?, motivo = ? WHERE id = ?';
+    const sql = 'UPDATE Consultas SET motivo = ? WHERE id_consulta = ?';
 
-    connection.query(sql, [id_paciente, horario, motivo, id], (erro, resultados) => {
+    connection.query(sql, [motivo, id], (erro, resultados) => {
         if(erro){
+            console.log("ERRO AO ATUALIZAR CONSULTA:", erro);
             return res.status(500).json({erro: erro.message});
         }
         return res.json({
             mensagem: 'Consulta atualizada!',
             id: id,
-            id_paciente: id_paciente,
-            horario: horario,
             motivo: motivo
         });
     });
