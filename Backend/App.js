@@ -58,8 +58,9 @@ server.put('/pacientes/:id', (req, res) => {
     const nome_paciente = req.body.nome_paciente;
     const sql = 'UPDATE pacientes SET nome = ? WHERE id_paciente = ?';
 
-    connection.query(sql, [nome_paciente, id], (erro, resultados) => {
+    connection.query(sql, [nome_paciente, id_paciente], (erro, resultados) => {
         if(erro){
+            console.log("ERRO AO ATUALIZAR PACIENTE:", erro);
             return res.status(500).json({erro: erro.message});
         }
         return res.json({
