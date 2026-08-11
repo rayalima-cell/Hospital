@@ -200,7 +200,7 @@ server.get('/Consultas', (req, res) => {
 server.get('/Consultas/:id', (req, res) =>{
 
     const id = req.params.id;
-    const sql = 'SELECT * FROM Consultas WHERE id = ?';
+    const sql = 'SELECT * FROM Consultas WHERE id_consulta = ?';
 
     connection.query(sql, [id], (erro, resultados) => {
         if(erro){
