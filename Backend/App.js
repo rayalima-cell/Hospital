@@ -20,7 +20,13 @@ server.get('/pacientes/:id', (req, res) => {
 
     const id = req.params.id;
 
-    return res.json(pacientes[id]);
+    connection.query('SELECT * FROM pacientes WHERE id_paciente = ?', [id], (erro, resultados) => {
+        if (erro) {
+            console.log(erro);
+            return res.status(500).json({ erro: erro.message });
+        }
+        return res.json(resultados[0]);
+    });
 });
 
 server.post('/pacientes', (req, res) => {
