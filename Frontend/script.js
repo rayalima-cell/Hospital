@@ -243,3 +243,82 @@ async function excluirConsulta(id) {
     
     listarConsultas()
 }
+
+async function buscarPaciente(){
+    const nome_paciente = document.getElementById('nome_paciente').value;
+
+    if(nome_paciente === ''){
+        alert('Digite o nome do paciente');
+        return;
+    }
+
+    try {
+        const resultadoPaciente = await fetch(`http://localhost:3025/pacientes/buscar?nome_paciente=${nome_paciente}`);
+
+        if(!resultadoPaciente.ok){
+            throw new Error('Paciente não encontrado');
+    }
+
+    const paciente = await resultadoPaciente.json();
+
+    console.log(paciente);
+    alert(`Paciente encontrado: ${paciente.nome_paciente}, CPF: ${paciente.cpf}, Data de Nascimento: ${paciente.data_nascimento}, Telefone: ${paciente.telefone}, Endereço: ${paciente.endereco}`);
+    
+    } catch (error) {
+        console.error(error);
+        alert('Paciente não encontrado');
+    }
+}
+
+async function buscarMedico(){
+
+    const nome_medico = document.getElementById('nome_medico').value;
+
+    if(nome_medico === ''){
+        alert('Digite o nome do médico');
+        return;
+    }
+
+    try{
+        const resultadoMedico = await fetch(
+            `http://localhost:3025/Medicos/buscar?nome=${nome_medico}`
+        );
+
+        const medico = await resultadoMedico.json();
+
+        if(medico.length === 0){
+            alert('Médico não encontrado');
+            return;
+        }
+        console.log(medico);
+        alert(`Médico encontrado: ${medico[0].nome}`);
+    }catch (error) {
+        console.error(error);
+        alert('Erro ao buscar médico');
+    }
+}
+
+async function buscarConsulta(){
+    const id_paciente = document.getElementById('id_paciente_consulta').value;
+
+    if(id_paciente === ''){
+        alert('Digite o ID do paciente');
+        return;
+    }
+
+    try {
+        const resultadoConsulta = await fetch(`http://localhost:3025/Consultas/buscar?id_paciente=${id_paciente}`);
+
+        if(!resultadoConsulta.ok){
+            throw new Error('Consulta não encontrada');
+        }
+
+        const consulta = await resultadoConsulta.json();
+
+        console.log(consulta);
+        alert(`Consulta encontrada: ${consulta.motivo}`);
+    } catch (error) {
+        console.error(error);
+        alert('Erro ao buscar consulta');
+    }
+}

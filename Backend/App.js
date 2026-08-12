@@ -29,6 +29,21 @@ server.get('/pacientes/:id', (req, res) => {
     });
 });
 
+server.get('/pacientes/buscar', (req, res) => {
+
+    const nome_paciente = req.query.nome_paciente;
+
+    const sql = 'SELECT * FROM pacientes WHERE nome_paciente LIKE ?';
+
+    connection.query(sql, [`%${nome_paciente}%`], (erro, resultados) => {
+        if (erro) {
+            console.log(erro);
+            return res.status(500).json({ erro: erro.message });
+        }
+        return res.json(resultados);
+    });
+});
+
 server.post('/pacientes', (req, res) => {
 
     const { nome_paciente, cpf, data_nascimento, telefone, endereco } = req.body;
@@ -123,6 +138,21 @@ server.get('/Medicos/:id', (req, res) => {
     });
 });
 
+server.get('/Medicos/buscar', (req, res) => {
+
+    const nome_medico = req.query.nome_medico;
+
+    const sql = 'SELECT * FROM Medicos WHERE nome LIKE ?';
+
+    connection.query(sql, [`%${nome_medico}%`], (erro, resultados) => {
+        if (erro) {
+            console.log(erro);
+            return res.status(500).json({ erro: erro.message });
+        }
+        return res.json(resultados);
+    });
+});
+
 server.post('/Medicos', (req, res) => {
     
     const { nome, especialidade, telefone } = req.body
@@ -207,6 +237,21 @@ server.get('/Consultas/:id', (req, res) =>{
             return res.status(500).json({erro: erro.message});
         }
         return res.json(resultados[0]);
+    });
+});
+
+server.get('/Consultas/buscar', (req, res) => {
+
+    const id_consulta = req.query.id_consulta;
+
+    const sql = 'SELECT * FROM Consultas WHERE id_consulta = ?';
+
+    connection.query(sql, [id_consulta], (erro, resultados) => {
+        if (erro) {
+            console.log(erro);
+            return res.status(500).json({ erro: erro.message });
+        }
+        return res.json(resultados);
     });
 });
 

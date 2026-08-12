@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navegação">
+        <a href="index.html">Cadastrar Paciente</a>
+        <a href="medico.html">Cadastrar Médico</a>
+        <a href="consultas.html">Cadastrar Consultas</a>
+        <a href="listar.html">Buscar</a>
+    </div>
+
+    <h5>Buscar Paciente</h5>
+    <label>Nome: </label>
+    <input type="text" id="nome_paciente" placeholder="Digite o paciente">
+    <br>
+
+    <button onclick="buscarPaciente()"> Buscar Paciente </button>
+
+    <div id="resultadoPaciente"></div>
+
+    <hr>
+
+    <h5>Buscar Médico</h5>
+    <label>Nome: </label>
+    <input type="text" id="nome_medico" placeholder="Digite o médico">
+    <br>
+
+    <button onclick="buscarMedico()"> Buscar Médico </button>
+    
+    <div id="resultadoMedico"></div>
+    <hr>
+
+    <h5>Buscar Consultas</h5>
+    <label>ID da Consulta: </label>
+    <input type="text" id="id_consulta" placeholder="Digite o ID da consulta">
+    <br>
+
+    <button onclick="buscarConsulta()"> Buscar Consulta </button>
+    <div id="resultadoConsulta"></div>
+</body>
+</html>
