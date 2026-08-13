@@ -400,3 +400,7 @@ server.delete('/Consultas/:id', (req, res) => {
         });
     });
 });
+
+server.listen(3025, () =>{
+    console.log("Servidor rodando na porta 3025");
+})
