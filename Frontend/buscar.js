@@ -62,7 +62,7 @@ async function buscarMedico() {
 
     try {
         const resposta = await fetch(
-            `http://localhost:3025/medicos/buscar?nome_medico=${encodeURIComponent(nome_medico)}`
+        `http://localhost:3025/Medicos/buscar?nome_medico=${encodeURIComponent(nome_medico)}`
         );
 
         if (!resposta.ok) {
@@ -104,7 +104,8 @@ async function buscarConsulta() {
 
     try {
         const resposta = await fetch(
-            `http://localhost:3025/consultas/buscar?id_consulta=${encodeURIComponent(id_consulta)}`
+            `http://localhost:3025/Consultas/buscar?id_consulta=${encodeURIComponent(id_consulta)}`
+
         );
 
         if (!resposta.ok) {
