@@ -153,13 +153,13 @@ server.get('/Medicos', (req, res) => {
 
 
 // BUSCAR MÉDICO PELO NOME
-server.get('/Medicos/buscar', (req, res) => {
+server.get('/Medicos/nome', (req, res) => {
 
-    const nome_medico = req.query.nome_medico;
+    const nome= req.query.nome;
 
     const sql = 'SELECT * FROM Medicos WHERE nome LIKE ?';
 
-    connection.query(sql, [`%${nome_medico}%`], (erro, resultados) => {
+    connection.query(sql, [`%${nome}%`], (erro, resultados) => {
 
         if (erro) {
             console.log('ERRO AO BUSCAR MÉDICO:', erro);

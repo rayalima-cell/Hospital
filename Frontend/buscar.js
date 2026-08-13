@@ -53,16 +53,16 @@ async function buscarPaciente() {
 // BUSCAR MÉDICO PELO NOME
 // ===============================
 async function buscarMedico() {
-    const nome_medico = document.getElementById('nome_medico').value.trim();
+    const nome= document.getElementById('nome').value.trim();
 
-    if (nome_medico === '') {
+    if (nome === '') {
         alert('Digite o nome do médico');
         return;
     }
 
     try {
         const resposta = await fetch(
-        `http://localhost:3025/Medicos/buscar?nome_medico=${encodeURIComponent(nome_medico)}`
+        `http://localhost:3025/Medicos/nome?nome=${encodeURIComponent(nome)}`
         );
 
         if (!resposta.ok) {
@@ -80,7 +80,7 @@ async function buscarMedico() {
 
         const medico = medicos[0];
 
-        alert(`Médico encontrado: ${medico.nome_medico}`);
+        alert(`Médico encontrado: ${medico.nome}`);
 
         console.log('Médico:', medico);
 
