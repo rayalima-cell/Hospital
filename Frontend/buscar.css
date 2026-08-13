@@ -117,23 +117,6 @@ button:hover {
     background-color: #125aa0;
 }
 
-
-/* ===== RESULTADOS ===== */
-
-#resultadoPaciente,
-#resultadoMedico,
-#resultadoConsulta {
-    margin-top: 20px;
-
-    background-color: #f8f9fa;
-
-    border: 1px solid #ddd;
-    border-radius: 6px;
-
-    padding: 12px;
-}
-
-
 /* ===== LINHAS ===== */
 
 hr {
