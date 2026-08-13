@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <script src="buscar.js"></script>
+
     <div class="navegação">
         <a href="index.html">Cadastrar Paciente</a>
         <a href="medico.html">Cadastrar Médico</a>
@@ -15,32 +18,34 @@
     </div>
 
     <h5>Buscar Paciente</h5>
-    <label>Nome: </label>
-    <input type="text" id="nome_paciente" placeholder="Digite o paciente">
-    <br>
+<label>Nome: </label>
+<input type="text" id="nome_paciente" placeholder="Digite o paciente">
+<br>
 
-    <button onclick="buscarPaciente()"> Buscar Paciente </button>
+<button onclick="buscarPaciente()">Buscar Paciente</button>
 
-    <div id="resultadoPaciente"></div>
+<div id="resultadoPaciente"></div>
 
-    <hr>
+<hr>
 
-    <h5>Buscar Médico</h5>
-    <label>Nome: </label>
-    <input type="text" id="nome_medico" placeholder="Digite o médico">
-    <br>
+<h5>Buscar Médico</h5>
+<label>Nome: </label>
+<input type="text" id="nome_medico" placeholder="Digite o médico">
+<br>
 
-    <button onclick="buscarMedico()"> Buscar Médico </button>
-    
-    <div id="resultadoMedico"></div>
-    <hr>
+<button onclick="buscarMedico()">Buscar Médico</button>
 
-    <h5>Buscar Consultas</h5>
-    <label>ID da Consulta: </label>
-    <input type="text" id="id_consulta" placeholder="Digite o ID da consulta">
-    <br>
+<div id="resultadoMedico"></div>
 
-    <button onclick="buscarConsulta()"> Buscar Consulta </button>
-    <div id="resultadoConsulta"></div>
+<hr>
+
+<h5>Buscar Consultas</h5>
+<label>ID da Consulta: </label>
+<input type="text" id="id_consulta" placeholder="Digite o ID da consulta">
+<br>
+
+<button onclick="buscarConsulta()">Buscar Consulta</button>
+
+<div id="resultadoConsulta"></div>
 </body>
 </html>
