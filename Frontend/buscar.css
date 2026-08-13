@@ -12,7 +12,8 @@ body {
     color: #333;
 }
 
-/* ===== TÍTULO ===== */
+
+/* ===== TÍTULO PRINCIPAL ===== */
 
 h1 {
     text-align: center;
@@ -20,12 +21,50 @@ h1 {
     margin-bottom: 30px;
 }
 
+
+/* ===== NAVEGAÇÃO ===== */
+
+.navegação {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.navegação a {
+    display: inline-block;
+    margin-top: 0;
+    margin-right: 10px;
+    padding: 10px 15px;
+
+    background-color: #1976d2;
+    color: white;
+
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.navegação a:hover {
+    background-color: #125aa0;
+}
+
+
+/* ===== TÍTULOS DAS BUSCAS ===== */
+
+h5 {
+    font-size: 22px;
+    color: #1976d2;
+
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+
 /* ===== FORMULÁRIO ===== */
 
 label {
     display: block;
     margin-top: 15px;
     margin-bottom: 6px;
+
     font-weight: bold;
     color: #444;
 }
@@ -33,16 +72,20 @@ label {
 input {
     width: 100%;
     padding: 12px;
+
     border: 1px solid #ccc;
     border-radius: 6px;
+
     font-size: 15px;
     outline: none;
 }
 
 input:focus {
     border-color: #1976d2;
+
     box-shadow: 0 0 4px rgba(25, 118, 210, 0.3);
 }
+
 
 /* ===== QUEBRA DE LINHA ===== */
 
@@ -50,86 +93,61 @@ br {
     display: none;
 }
 
+
 /* ===== BOTÕES ===== */
 
 button {
     margin-top: 20px;
     padding: 12px 20px;
+
     border: none;
     border-radius: 6px;
+
     font-size: 15px;
     font-weight: bold;
+
     cursor: pointer;
     transition: 0.2s;
-}
 
-/* Botão Listar */
-
-button:first-of-type {
     background-color: #1976d2;
     color: white;
 }
 
-button:first-of-type:hover {
+button:hover {
     background-color: #125aa0;
 }
 
-/* Botão Cadastrar */
 
-button:last-of-type {
-    background-color: #2e7d32;
-    color: white;
-    margin-left: 10px;
-}
+/* ===== RESULTADOS ===== */
 
-button:last-of-type:hover {
-    background-color: #1b5e20;
-}
+#resultadoPaciente,
+#resultadoMedico,
+#resultadoConsulta {
+    margin-top: 20px;
 
-/* ===== LISTAS ===== */
-
-ul {
-    margin-top: 25px;
-    padding: 0;
-    list-style: none;
-}
-
-li {
     background-color: #f8f9fa;
+
     border: 1px solid #ddd;
     border-radius: 6px;
+
     padding: 12px;
-    margin-bottom: 8px;
 }
 
-/* ===== LINHA ===== */
+
+/* ===== LINHAS ===== */
 
 hr {
     border: none;
     border-top: 1px solid #ddd;
+
     margin: 30px 0;
 }
 
-/* ===== LINKS DE NAVEGAÇÃO ===== */
-
-a {
-    display: inline-block;
-    margin-top: 20px;
-    margin-right: 10px;
-    padding: 10px 15px;
-    background-color: #1976d2;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-}
-
-a:hover {
-    background-color: #125aa0;
-}
 
 /* ===== RESPONSIVIDADE ===== */
 
 @media (max-width: 600px) {
+
     body {
         padding: 20px 15px;
     }
@@ -138,9 +156,19 @@ a:hover {
         font-size: 25px;
     }
 
+    h5 {
+        font-size: 20px;
+    }
+
+    .navegação a {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
     button {
         width: 100%;
         margin-left: 0 !important;
     }
 }
-
